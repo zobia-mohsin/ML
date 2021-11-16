@@ -19,8 +19,6 @@ Using methods covered in class:
 Submit your completed python file.'''
 
 
-
-
 import pandas as pd
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
@@ -184,8 +182,8 @@ a = []
 b = []
 Dict = {}
 
-with open("target_names.csv", mode="r") as inp:
-    reader = csv.reader(inp)
+with open("target_names.csv", mode="r") as tn:
+    reader = csv.reader(tn)
     csv_dict = {rows[0]: rows[2] for rows in reader}
 
 print('                                                                  ')
@@ -210,7 +208,7 @@ print('The percentages of Right guesses is:' )
 
 print(format(knn.score(test_train, test_target), ".2%"))
 
-wrong = [(g,p,e) for (g,p,e) in zip(games,a,b) if p != e]
+wrong = [(game_l,pred,exp) for (game_l,pred,exp) in zip(games,a,b) if pred != exp]
 
 pd.set_option('display.max_rows', None)
 
@@ -227,7 +225,7 @@ print('Wrong guesses are:')
 print(wrong)
 
 header = ['title','predicted','expected']
-with open('games_result.csv','w',newline='') as f:
-    obj= csv.writer(f)
+with open('games_result.csv','w',newline='') as file:
+    obj= csv.writer(file)
     obj.writerow(header)
     obj.writerows(results)
